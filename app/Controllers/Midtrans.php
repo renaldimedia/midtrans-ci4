@@ -230,7 +230,10 @@ class Midtrans extends ResourceController
         }
     
         $snapToken = \Midtrans\Snap::getSnapToken($this->order);
-        return $this->respond(['snaptoken' => $snapToken]);
-      
+        $res = ['snaptoken' => $snapToken, 'additional_data'];
+        if(isset($post['additional_data'])){
+            $res['additional_data'] = $post['additional_data'];
+        }
+        return $this->respond($res);
     }
 }
